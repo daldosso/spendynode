@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var mongodb = require("mongodb");
+var ObjectID = mongodb.ObjectID;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -11,6 +13,12 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
   response.render('pages/index');
+});
+
+app.get("/spendykt", function(req, res) {
+    res.status(200).json({
+        success: true
+    });
 });
 
 app.listen(app.get('port'), function() {
