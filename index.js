@@ -25,6 +25,9 @@ app.get("/spendykt", function(req, res) {
 
 app.post("/spendykt-login", function(req, res) {
     var newContact = req.body;
+    if (!newContact) {
+        newContact = {};
+    }
     newContact.createDate = new Date();
     db.collection(USERS_COLLECTION).insertOne(newContact, function(err, doc) {
         if (err) {
