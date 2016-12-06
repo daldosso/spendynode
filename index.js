@@ -25,21 +25,43 @@ app.get("/spendykt", function(req, res) {
     });
 });
 
-app.post("/spendykt-login", function(req, res) {
-    var newContact = req.body,
+function createNewUser(req, res) {
+    var newUser = req.body,
         sessionID = new ObjectID().toString();
-    if (!newContact) {
-        newContact = {};
+    if (!newUser) {
+        newUser = {};
     }
-    newContact.createDate = new Date();
-    newContact.sessionID = sessionID;
-    db.collection(USERS_COLLECTION).insertOne(newContact, function(err, doc) {
+    newUser.createDate = new Date();
+    newUser.sessionID = sessionID;
+    db.collection(USERS_COLLECTION).insertOne(newUser, function (err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to create new contact.");
         } else {
             res.status(201).json(doc.ops[0].sessionID);
         }
     });
+}
+
+function retrieveUser(req, res) {
+    var body = req.body,
+        responseBody = {};
+    responseBody.success = false;
+    db.collection(USERS_COLLECTION).findOne({ sessionID: body.sessionID }, function(err, doc) {
+        if (!err && doc) {
+            responseBody.success = true;
+        }
+        res.status(200).json(responseBody);
+    });
+}
+
+app.post("/spendykt-login", function(req, res) {
+    var body = req.body;
+    if (body.sessionID) {
+        retrieveUser(req, res);
+    }
+    else {
+        createNewUser(req, res);
+    }
 });
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
