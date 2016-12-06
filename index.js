@@ -26,16 +26,18 @@ app.get("/spendykt", function(req, res) {
 });
 
 app.post("/spendykt-login", function(req, res) {
-    var newContact = req.body;
+    var newContact = req.body,
+        sessionID = new ObjectID().toString();
     if (!newContact) {
         newContact = {};
     }
     newContact.createDate = new Date();
+    newContact.sessionID = sessionID;
     db.collection(USERS_COLLECTION).insertOne(newContact, function(err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to create new contact.");
         } else {
-            res.status(201).json(doc.ops[0]);
+            res.status(201).json(doc.ops[0].sessionID);
         }
     });
 });
