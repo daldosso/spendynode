@@ -37,7 +37,10 @@ function createNewUser(req, res) {
         if (err) {
             handleError(res, err.message, "Failed to create new contact.");
         } else {
-            res.status(201).json(doc.ops[0].sessionID);
+            let sessionID = doc.ops[0].sessionID;
+            res.status(201).json({
+                sessionID
+            });
         }
     });
 }
