@@ -58,13 +58,18 @@ function retrieveUser(req, res) {
 }
 
 app.post("/spendykt-login", function(req, res) {
-    var body = req.body;
+    let body = req.body;
     if (body.sessionID) {
         retrieveUser(req, res);
-    }
-    else {
+    } else {
         createNewUser(req, res);
     }
+});
+
+app.get("/spendykt-expenses", function(req, res) {
+    res.status(200).json({
+        success: true
+    });
 });
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
