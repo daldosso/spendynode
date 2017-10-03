@@ -58,7 +58,7 @@ function retrieveUser(req, res) {
 }
 
 app.post("/spendykt-login", function(req, res) {
-    let body = req.body;
+    var body = req.body;
     if (body.sessionID) {
         retrieveUser(req, res);
     } else {
