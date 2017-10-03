@@ -67,9 +67,11 @@ app.post("/spendykt-login", function(req, res) {
 });
 
 app.get("/spendykt-expenses", function(req, res) {
-    res.status(200).json({
-        success: true
-    });
+    res.status(200).json([
+            { date: '01/01/2017', amount: 150.43},
+            { date: '04/01/2017', amount: 50.00},
+            { date: '06/01/2017', amount: 10.37}
+        ]);
 });
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
