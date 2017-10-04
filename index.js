@@ -4,6 +4,7 @@ var express = require('express'),
     mongodb = require("mongodb"),
     ObjectID = mongodb.ObjectID,
     USERS_COLLECTION = "users",
+    EXPENSES_COLLECTION = "expenses",
     db;
 
 app.set('port', (process.env.PORT || 5000));
@@ -67,11 +68,16 @@ app.post("/spendykt-login", function(req, res) {
 });
 
 app.get("/spendykt-expenses", function(req, res) {
-    res.status(200).json([
-            { date: '01/01/2017', amount: 150.43},
-            { date: '04/01/2017', amount: 50.00},
-            { date: '06/01/2017', amount: 10.37}
-        ]);
+    var body = req.body,
+        responseBody = {};
+    responseBody.success = false;
+    db.collection(EXPENSES_COLLECTION)
+        .find({}, {})
+        .toArray(
+            function(err, expenses) {
+                res.send({ expenses:  expenses});
+            }
+        );
 });
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
