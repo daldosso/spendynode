@@ -75,7 +75,7 @@ app.get("/spendykt-expenses", function(req, res) {
         .find({}, {})
         .toArray(
             function(err, expenses) {
-                res.send({ expenses:  expenses});
+                res.send(expenses);
             }
         );
 });
