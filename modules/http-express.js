@@ -6,6 +6,8 @@ let config = require('config'),
     cors = require('cors'),
     compression = require('compression');
 
+app.set('port', (process.env.PORT || 5000));
+
 app.use(bodyParser.json({limit: '20mb'}))
    .use(compression()).use(cors());
 
