@@ -27,7 +27,7 @@ app.get("/spendykt", function(req, res) {
 });
 
 function createNewUser(req, res) {
-    var newUser = req.body,
+    let newUser = req.body,
         sessionID = new ObjectID().toString();
     if (!newUser) {
         newUser = {};
