@@ -44,13 +44,13 @@ let getObjectID = (req) => new ObjectID(req.body.Id);
 
 module.exports = {
     connect() {
-        mongodb.MongoClient.connect(config.DBHost, function (err, database) {
+        mongodb.MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
             if (err) {
                 console.log(err);
-            } else {
-                db = database;
-                console.log("Database connection ready");
+                process.exit(1);
             }
+            db = database;
+            console.log("Database connection ready");
         });
     },
 
