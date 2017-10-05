@@ -30,8 +30,9 @@ app.route("/spendykt-expenses")
 
 module.exports = {
     listen() {
-        app.listen(config.HttpPort, function () {
-            console.log('Http express listening on port ' + config.HttpPort);
+        const port = app.get('port');
+        app.listen(port, function () {
+            console.log('Http express listening on port ' + port);
         });
         return app;
     }
