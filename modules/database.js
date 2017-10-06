@@ -97,12 +97,18 @@ module.exports = {
 
     insertExpenses(req, res) {
         let expense = req.body;
-        console.log('insertExpenses', expense);
         if (isArray(expense)) {
             db.collection(EXPENSES_COLLECTION).insertMany(expense, handleResponse(res));
         } else {
             db.collection(EXPENSES_COLLECTION).insertOne(expense, handleResponse(res));
         }
+    },
+
+    deleteExpense(req, res) {
+        db.collection(EXPENSES_COLLECTION).removeOne(
+            { id: req.params.id },
+            handleResponse(res)
+        );
     },
 
 };
