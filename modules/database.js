@@ -97,6 +97,7 @@ module.exports = {
 
     insertExpenses(req, res) {
         let expense = req.body;
+        console.log('insertExpenses', expense);
         if (isArray(expense)) {
             db.collection(EXPENSES_COLLECTION).insertMany(expense, handleResponse(res));
         } else {
