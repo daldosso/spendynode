@@ -32,6 +32,8 @@ let handleResponse = (res) => {
     }
 };
 
+let createObjectID = (id) => new ObjectID(id);
+
 module.exports = {
     connect() {
         mongodb.MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
@@ -118,7 +120,7 @@ module.exports = {
     deleteLog(req, res) {
         console.log("req.query.id", req.query.id);
         db.collection(LOG_COLLECTION).removeOne(
-            { _id: req.query.id },
+            { _id: createObjectID(req.query.id) },
             handleResponse(res)
         );
     },
