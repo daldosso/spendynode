@@ -116,9 +116,9 @@ module.exports = {
     },
 
     deleteLog(req, res) {
-        console.log("req.body.id", req.body.id);
+        console.log("req.query.id", req.query.id);
         db.collection(LOG_COLLECTION).removeOne(
-            { _id: req.params.id },
+            { _id: req.query.id },
             handleResponse(res)
         );
     },
