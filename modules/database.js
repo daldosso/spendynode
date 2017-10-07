@@ -116,7 +116,7 @@ module.exports = {
     },
 
     deleteLog(req, res) {
-        console.log("req.params.id", req.params.id);
+        console.log("req.body.id", req.body.id);
         db.collection(LOG_COLLECTION).removeOne(
             { _id: req.params.id },
             handleResponse(res)
