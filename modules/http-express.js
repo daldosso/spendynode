@@ -28,7 +28,8 @@ app.post("/spendykt-login", function(req, res) {
 
 app.route("/spendykt-expenses")
    .get(db.readExpenses)
-   .post(db.insertExpenses);
+   .post(db.insertExpenses)
+   .delete(db.deleteExpense);
 
 app.route("/log")
    .post(db.deleteLog)
