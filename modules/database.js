@@ -117,7 +117,7 @@ module.exports = {
 
     deleteLog(req, res) {
         db.collection(LOG_COLLECTION).removeOne(
-            { id: req.params.id },
+            { _id: req.params.id },
             handleResponse(res)
         );
     },
