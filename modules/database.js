@@ -32,16 +32,6 @@ let handleResponse = (res) => {
     }
 };
 
-let updateOne = (req, res, updateObject) => {
-    db.collection(LOG_COLLECTION).updateOne(
-        { _id: getObjectID(req) },
-        updateObject,
-        handleResponse(res)
-    );
-};
-
-let getObjectID = (req) => new ObjectID(req.body.Id);
-
 module.exports = {
     connect() {
         mongodb.MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
@@ -106,6 +96,18 @@ module.exports = {
 
     deleteExpense(req, res) {
         db.collection(EXPENSES_COLLECTION).removeOne(
+            { id: req.params.id },
+            handleResponse(res)
+        );
+    },
+
+    postLog(req, res) {
+        let log = req.body;
+        db.collection(LOG_COLLECTION).insertOne(log, handleResponse(res));
+    },
+
+    deleteLog(req, res) {
+        db.collection(LOG_COLLECTION).removeOne(
             { id: req.params.id },
             handleResponse(res)
         );

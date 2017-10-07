@@ -27,8 +27,12 @@ app.post("/spendykt-login", function(req, res) {
 });
 
 app.route("/spendykt-expenses")
-    .get(db.readExpenses)
-    .post(db.insertExpenses);
+   .get(db.readExpenses)
+   .post(db.insertExpenses);
+
+app.route("/log")
+   .post(db.deleteLog)
+   .delete(db.deleteLog);
 
 module.exports = {
     listen() {
