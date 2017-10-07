@@ -101,7 +101,16 @@ module.exports = {
         );
     },
 
-    postLog(req, res) {
+    readLogs(req, res) {
+        let body = req.body,
+            responseBody = {};
+        responseBody.success = false;
+        db.collection(LOG_COLLECTION)
+            .find({}, {})
+            .toArray((err, expenses) => res.send(expenses));
+    },
+
+    upsertLog(req, res) {
         let log = req.body;
         db.collection(LOG_COLLECTION).insertOne(log, handleResponse(res));
     },

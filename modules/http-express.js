@@ -32,7 +32,8 @@ app.route("/spendykt-expenses")
    .delete(db.deleteExpense);
 
 app.route("/log")
-   .post(db.deleteLog)
+   .get(db.readLogs)
+   .post(db.upsertLog)
    .delete(db.deleteLog);
 
 module.exports = {
