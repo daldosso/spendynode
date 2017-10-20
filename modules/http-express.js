@@ -26,6 +26,9 @@ app.post("/spendykt-login", function(req, res) {
     }
 });
 
+app.route("/spendykt-monthly-expenses")
+   .get(db.readMonthlyExpenses);
+
 app.route("/spendykt-expenses")
    .get(db.readExpenses)
    .post(db.insertExpenses)

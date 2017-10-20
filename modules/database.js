@@ -34,6 +34,16 @@ let handleResponse = (res) => {
 
 let createObjectID = (id) => new ObjectID(id);
 
+let parseDate = (expense) => {
+    if (expense.date && expense.date.length === 10 && expense.date.indexOf('/') === 2) {
+        let parsedExpense = expense;
+        parsedExpense.year = expense.date.substring(6, 9);
+        parsedExpense.month = expense.date.substring(3, 4);
+        return parsedExpense;
+    }
+    return expense;
+};
+
 module.exports = {
     connect() {
         mongodb.MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
@@ -78,6 +88,14 @@ module.exports = {
         });
     },
 
+    readMonthlyExpenses(req, res) {
+        let responseBody = {};
+        responseBody.success = false;
+        db.collection(EXPENSES_COLLECTION)
+            .find({}, {})
+            .toArray((err, expenses) => res.send(expenses));
+    },
+
     readExpenses(req, res) {
         let body = req.body,
             responseBody = {};
@@ -88,7 +106,7 @@ module.exports = {
     },
 
     insertExpenses(req, res) {
-        let expense = req.body;
+        let expense = parseDate(req.body);
         if (isArray(expense)) {
             db.collection(EXPENSES_COLLECTION).insertMany(expense, handleResponse(res));
         } else {
