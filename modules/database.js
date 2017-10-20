@@ -37,8 +37,8 @@ let createObjectID = (id) => new ObjectID(id);
 let parseDate = (expense) => {
     if (expense.date && expense.date.length === 10 && expense.date.indexOf('/') === 2) {
         let parsedExpense = expense;
-        parsedExpense.year = expense.date.substring(6, 9);
-        parsedExpense.month = expense.date.substring(3, 4);
+        parsedExpense.year = expense.date.substring(6, 10);
+        parsedExpense.month = expense.date.substring(3, 5);
         return parsedExpense;
     }
     return expense;
