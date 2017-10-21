@@ -93,7 +93,10 @@ module.exports = {
         responseBody.success = false;
         db.collection(EXPENSES_COLLECTION)
             .aggregate({"$group":{"_id":{"year": "$year", "month": "$month"}, "total_amount":{$sum:"$amount"}}})
-            .toArray((err, expenses) => res.send(expenses));
+            .toArray((err, expenses) => {
+                console.log('expenses', expenses);
+                return res.send(expenses);
+            });
     },
 
     readExpenses(req, res) {
