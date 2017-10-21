@@ -94,7 +94,6 @@ module.exports = {
         db.collection(EXPENSES_COLLECTION)
             .aggregate([{$group: {"_id": {"year": "$year", "month": "$month"}, "total_amount": {$sum: "$amount"}}}])
             .toArray((err, expenses) => {
-                console.log('expenses', expenses);
                 return res.send(expenses);
             });
     },
@@ -135,6 +134,7 @@ module.exports = {
 
     upsertLog(req, res) {
         let log = req.body;
+        log.serverDate = new Date();
         db.collection(LOG_COLLECTION).insertOne(log, handleResponse(res));
     },
 
