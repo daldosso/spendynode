@@ -34,6 +34,11 @@ app.route("/spendykt-expenses")
    .post(db.insertExpenses)
    .delete(db.deleteExpense);
 
+app.route("/spendykt-categories")
+   .get(db.readCategories)
+   .post(db.insertCategories)
+   .delete(db.deleteCategory);
+
 app.route("/log")
    .get(db.readLogs)
    .post(db.upsertLog)

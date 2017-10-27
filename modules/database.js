@@ -5,7 +5,8 @@ let config = require('config'),
 
 const LOG_COLLECTION = 'log',
       USERS_COLLECTION = "users",
-      EXPENSES_COLLECTION = "expenses";
+      EXPENSES_COLLECTION = "expenses",
+      CATEGORIES_COLLECTION = "categories";
 
 let isArray = (a) => (!!a) && (a.constructor === Array);
 
@@ -42,6 +43,27 @@ let parseDate = (expense) => {
         return parsedExpense;
     }
     return expense;
+};
+
+let readData = (req, res, collection) => {
+    let body = req.body,
+        responseBody = {};
+    responseBody.success = false;
+    db.collection(collection)
+        .find({}, {})
+        .toArray((err, data) => res.send(data));
+};
+
+let insertData = (data, res, collection) => {
+    if (isArray(data)) {
+        db.collection(collection).insertMany(data, handleResponse(res));
+    } else {
+        db.collection(collection).insertOne(data, handleResponse(res));
+    }
+};
+
+let deleteData = (id, res, collection) => {
+    db.collection(collection).removeOne({ id }, handleResponse(res));
 };
 
 module.exports = {
@@ -102,28 +124,29 @@ module.exports = {
     },
 
     readExpenses(req, res) {
-        let body = req.body,
-            responseBody = {};
-        responseBody.success = false;
-        db.collection(EXPENSES_COLLECTION)
-            .find({}, {})
-            .toArray((err, expenses) => res.send(expenses));
+        readData(req, res, EXPENSES_COLLECTION);
+    },
+
+    readCategories(req, res) {
+        readData(req, res, CATEGORIES_COLLECTION);
     },
 
     insertExpenses(req, res) {
-        let expense = parseDate(req.body);
-        if (isArray(expense)) {
-            db.collection(EXPENSES_COLLECTION).insertMany(expense, handleResponse(res));
-        } else {
-            db.collection(EXPENSES_COLLECTION).insertOne(expense, handleResponse(res));
-        }
+        let data = parseDate(req.body);
+        insertData(data, res, EXPENSES_COLLECTION);
+    },
+
+    insertCategories(req, res) {
+        let data = req.body;
+        insertData(data, res, CATEGORIES_COLLECTION);
     },
 
     deleteExpense(req, res) {
-        db.collection(EXPENSES_COLLECTION).removeOne(
-            { id: req.params.id },
-            handleResponse(res)
-        );
+        deleteData(req.params.id, res, EXPENSES_COLLECTION);
+    },
+
+    deleteCategory(req, res) {
+        deleteData(req.params.id, res, CATEGORIES_COLLECTION);
     },
 
     readLogs(req, res) {
