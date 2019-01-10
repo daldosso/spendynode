@@ -45,7 +45,7 @@ app.route("/log")
    .delete(db.deleteLog);
 
 app.route("/challenge-run")
-   .get((req, res) => res.send({ test }));
+   .get((req, res) => res.send({ test: "test" }));
 
 module.exports = {
     listen() {
