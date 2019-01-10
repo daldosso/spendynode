@@ -44,6 +44,9 @@ app.route("/log")
    .post(db.upsertLog)
    .delete(db.deleteLog);
 
+app.route("/challenge-run")
+   .get((req, res) => res.send({ test }));
+
 module.exports = {
     listen() {
         const port = app.get('port');
