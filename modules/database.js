@@ -6,7 +6,8 @@ let config = require('config'),
 const LOG_COLLECTION = 'log',
       USERS_COLLECTION = "users",
       EXPENSES_COLLECTION = "expenses",
-      CATEGORIES_COLLECTION = "categories";
+      CATEGORIES_COLLECTION = "categories",
+      CHALLENGE_RUN_COLLECTION = "challengerun";
 
 let isArray = (a) => (!!a) && (a.constructor === Array);
 
@@ -170,6 +171,15 @@ module.exports = {
             { _id: createObjectID(req.query.id) },
             handleResponse(res)
         );
+    },
+
+    readChallengeRun(req, res) {
+        let body = req.body,
+            responseBody = {};
+        responseBody.success = false;
+        db.collection(CHALLENGE_RUN_COLLECTION)
+            .find({}, {})
+            .toArray((err, expenses) => res.send(expenses));
     },
 
 };
