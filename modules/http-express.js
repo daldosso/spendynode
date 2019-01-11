@@ -45,7 +45,14 @@ app.route("/log")
    .delete(db.deleteLog);
 
 app.route("/challenge-run")
-   .get((req, res) => res.send({ test: "test" }));
+   .get((req, res) => res.send(
+       [
+        { id: 1, description: "Poker Novarese Castelletto T.", date: "12/01/2019", hour: "15:00", distance: "6 km", place: "Castelletto Ticino", note: "" },
+        { id: 2, description: "21° Cross Città di Novi Ligure", date: "20/01/2019", hour: "15:00", distance: "6 km", place: "Novi Ligure (AL)", note: "" },
+        { id: 3, description: "18° Cross del Tecnoparco", date: "03/02/2019", hour: "15:00", distance: "6 km", place: "Verbania (VB)", note: "" }
+       ]
+       
+    ));
 
 module.exports = {
     listen() {
