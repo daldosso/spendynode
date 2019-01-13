@@ -45,7 +45,9 @@ app.route("/log")
    .delete(db.deleteLog);
 
 app.route("/challenge-run")
-   .get(db.readChallengeRun);
+   .get(db.readChallengeRun)
+   .post(db.upsertChallengeRun)
+   .delete(db.deleteChallengeRun);
 
 module.exports = {
     listen() {

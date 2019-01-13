@@ -182,4 +182,18 @@ module.exports = {
             .toArray((err, expenses) => res.send(expenses));
     },
 
+    upsertChallengeRun(req, res) {
+        let log = req.body;
+        log.serverDate = new Date();
+        db.collection(CHALLENGE_RUN_COLLECTION).insertOne(log, handleResponse(res));
+    },
+
+    deleteChallengeRun(req, res) {
+        db.collection(CHALLENGE_RUN_COLLECTION).removeOne(
+            { _id: createObjectID(req.query.id) },
+            handleResponse(res)
+        );
+    },
+
+
 };
