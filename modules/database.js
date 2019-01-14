@@ -7,7 +7,9 @@ const LOG_COLLECTION = 'log',
       USERS_COLLECTION = "users",
       EXPENSES_COLLECTION = "expenses",
       CATEGORIES_COLLECTION = "categories",
-      CHALLENGE_RUN_COLLECTION = "challengerun";
+      CHALLENGE_RUN_COLLECTION = "challengerun",
+      RUN_USERS_COLLECTION = "runusers",
+      RUN_EVENTS_COLLECTION = "runevents";
 
 let isArray = (a) => (!!a) && (a.constructor === Array);
 
@@ -179,13 +181,13 @@ module.exports = {
         responseBody.success = false;
         db.collection(CHALLENGE_RUN_COLLECTION)
             .find({}, {})
-            .toArray((err, expenses) => res.send(expenses));
+            .toArray((err, data) => res.send(data));
     },
 
     upsertChallengeRun(req, res) {
-        let log = req.body;
-        log.serverDate = new Date();
-        db.collection(CHALLENGE_RUN_COLLECTION).insertOne(log, handleResponse(res));
+        let data = req.body;
+        data.serverDate = new Date();
+        db.collection(CHALLENGE_RUN_COLLECTION).insertOne(data, handleResponse(res));
     },
 
     deleteChallengeRun(req, res) {
@@ -195,5 +197,46 @@ module.exports = {
         );
     },
 
+    readRunUsers(req, res) {
+        let responseBody = {};
+        responseBody.success = false;
+        db.collection(RUN_USERS_COLLECTION)
+            .find({}, {})
+            .toArray((err, data) => res.send(data));
+    },
+
+    upsertRunUser(req, res) {
+        let data = req.body;
+        data.serverDate = new Date();
+        db.collection(RUN_USERS_COLLECTION).insertOne(data, handleResponse(res));
+    },
+
+    deleteChallengeRun(req, res) {
+        db.collection(RUN_USERS_COLLECTION).removeOne(
+            { _id: createObjectID(req.query.id) },
+            handleResponse(res)
+        );
+    },
+
+    readRunEvents(req, res) {
+        let responseBody = {};
+        responseBody.success = false;
+        db.collection(RUN_EVENTS_COLLECTION)
+            .find({}, {})
+            .toArray((err, data) => res.send(data));
+    },
+
+    upsertRunEvent(req, res) {
+        let data = req.body;
+        data.serverDate = new Date();
+        db.collection(RUN_EVENTS_COLLECTION).insertOne(data, handleResponse(res));
+    },
+
+    deleteRunEvent(req, res) {
+        db.collection(RUN_EVENTS_COLLECTION).removeOne(
+            { _id: createObjectID(req.query.id) },
+            handleResponse(res)
+        );
+    },
 
 };

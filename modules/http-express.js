@@ -49,6 +49,16 @@ app.route("/challenge-run")
    .post(db.upsertChallengeRun)
    .delete(db.deleteChallengeRun);
 
+app.route("/run-users")
+   .get(db.readChallengeRun)
+   .post(db.upsertChallengeRun)
+   .delete(db.deleteChallengeRun);
+
+app.route("/run-events")
+   .get(db.readChallengeRun)
+   .post(db.upsertChallengeRun)
+   .delete(db.deleteChallengeRun);
+
 module.exports = {
     listen() {
         const port = app.get('port');
