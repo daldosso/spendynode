@@ -50,13 +50,13 @@ app.route("/challenge-run")
    .delete(db.deleteChallengeRun);
 
 app.route("/run-users")
-   .get(db.readChallengeRun)
-   .post(db.upsertChallengeRun)
+   .get(db.readRunUsers)
+   .post(db.upsertRunUser)
    .delete(db.deleteChallengeRun);
 
 app.route("/run-events")
-   .get(db.readChallengeRun)
-   .post(db.upsertChallengeRun)
+   .get(db.readRunEvents)
+   .post(db.upsertRunEvent)
    .delete(db.deleteChallengeRun);
 
 module.exports = {
