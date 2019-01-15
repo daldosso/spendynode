@@ -211,7 +211,7 @@ module.exports = {
         db.collection(RUN_USERS_COLLECTION).insertOne(data, handleResponse(res));
     },
 
-    deleteChallengeRun(req, res) {
+    deleteRunUser(req, res) {
         db.collection(RUN_USERS_COLLECTION).removeOne(
             { _id: createObjectID(req.query.id) },
             handleResponse(res)
