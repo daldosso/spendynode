@@ -59,6 +59,11 @@ app.route("/run-events")
    .post(db.upsertRunEvent)
    .delete(db.deleteRunEvent);
 
+app.route("/run-races")
+   .get(db.readRunRaces)
+   .post(db.upsertRunRaces)
+   .delete(db.deleteRunRaces);
+
 module.exports = {
     listen() {
         const port = app.get('port');

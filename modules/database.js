@@ -9,7 +9,8 @@ const LOG_COLLECTION = 'log',
       CATEGORIES_COLLECTION = "categories",
       CHALLENGE_RUN_COLLECTION = "challengerun",
       RUN_USERS_COLLECTION = "runusers",
-      RUN_EVENTS_COLLECTION = "runevents";
+      RUN_EVENTS_COLLECTION = "runevents",
+      RUN_RACES_COLLECTION = "runraces";
 
 let isArray = (a) => (!!a) && (a.constructor === Array);
 
@@ -234,6 +235,27 @@ module.exports = {
 
     deleteRunEvent(req, res) {
         db.collection(RUN_EVENTS_COLLECTION).removeOne(
+            { _id: createObjectID(req.query.id) },
+            handleResponse(res)
+        );
+    },
+
+    readRunRaces(req, res) {
+        let responseBody = {};
+        responseBody.success = false;
+        db.collection(RUN_RACES_COLLECTION)
+            .find({}, {})
+            .toArray((err, data) => res.send(data));
+    },
+
+    upsertRunRaces(req, res) {
+        let data = req.body;
+        data.serverDate = new Date();
+        db.collection(RUN_RACES_COLLECTION).insertOne(data, handleResponse(res));
+    },
+
+    deleteRunRaces(req, res) {
+        db.collection(RUN_RACES_COLLECTION).removeOne(
             { _id: createObjectID(req.query.id) },
             handleResponse(res)
         );
