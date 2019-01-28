@@ -54,6 +54,13 @@ app.route("/run-users")
    .post(db.upsertRunUser)
    .delete(db.deleteRunUser);
 
+app.route("/run-user-sin-up")
+   .post(db.runUserSingUp);
+
+app.route("/run-user-login")
+   .post(db.runUserLogin)
+   .delete(db.runUserLogout);
+
 app.route("/run-events")
    .get(db.readRunEvents)
    .post(db.upsertRunEvent)
