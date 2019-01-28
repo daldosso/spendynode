@@ -231,7 +231,7 @@ module.exports = {
         let body = req.body,
             responseBody = {};
         responseBody.success = false;
-        db.collection(RUN_USERS_COLLECTION)
+        db.collection(RUN_USERS_LOGIN_COLLECTION)
             .find({ username: body.username, password: body.password }, {})
             .toArray((err, data) => {
                 let session = db.collection(RUN_USERS_SESSION_COLLECTION).insertOne(data, handleResponse(res));
