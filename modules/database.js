@@ -235,7 +235,20 @@ module.exports = {
             .find({ username: body.username, password: body.password }, {})
             .toArray((err, data) => {
                 if (data.length === 1) {
-                    let session = db.collection(RUN_USERS_SESSION_COLLECTION).insertOne(data[0], handleResponse(res));
+                    let session = {
+                        username: data[0].username,
+                        start: new Date()
+                    }
+                    let session = db.collection(RUN_USERS_SESSION_COLLECTION).insertOne(session, (err, doc) => {
+                        if (err) {
+                            handleError(res, err.message, "Failed to create new user.");
+                        } else {
+                            let sessionID = doc.ops[0].sessionID;
+                            res.status(201).json({
+                                sessionID: sessionID
+                            });
+                        }
+                    });
                     res.send(session);    
                 }
                 // res.send(data);
