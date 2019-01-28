@@ -249,9 +249,7 @@ module.exports = {
                             });
                         }
                     });
-                    res.send(session);    
                 }
-                // res.send(data);
             });
     },
 
