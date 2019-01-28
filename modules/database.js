@@ -234,6 +234,7 @@ module.exports = {
         db.collection(RUN_USERS_LOGIN_COLLECTION)
             .find({ username: body.username, password: body.password }, {})
             .toArray((err, data) => {
+                console.log('data', data);
                 let session = db.collection(RUN_USERS_SESSION_COLLECTION).insertOne(data, handleResponse(res));
                 res.send(session);
                 // res.send(data);
