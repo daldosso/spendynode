@@ -240,6 +240,7 @@ module.exports = {
                         start: new Date()
                     }
                     let session = db.collection(RUN_USERS_SESSION_COLLECTION).insertOne(session, (err, doc) => {
+                        console.log('doc', doc);
                         if (err) {
                             handleError(res, err.message, "Failed to create new user.");
                         } else {
