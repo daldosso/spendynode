@@ -222,15 +222,15 @@ module.exports = {
     },
 
     runUserSingUp(req, res) {
-        let data = req.body;
-        data.serverDate = new Date();
+        let body = req.body;
+        body.serverDate = new Date();
         db.collection(RUN_USERS_LOGIN_COLLECTION)
             .find({ username: data.username }, {})
             .toArray((err, data) => {
                 if (data.length > 0) {
                     handleError(res, err.message, "Username already exists.");
                 } else {
-                    db.collection(RUN_USERS_LOGIN_COLLECTION).insertOne(data, handleResponse(res));
+                    db.collection(RUN_USERS_LOGIN_COLLECTION).insertOne(body, handleResponse(res));
                 }
             });
     },
