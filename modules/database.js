@@ -224,7 +224,15 @@ module.exports = {
     runUserSingUp(req, res) {
         let data = req.body;
         data.serverDate = new Date();
-        db.collection(RUN_USERS_LOGIN_COLLECTION).insertOne(data, handleResponse(res));
+        db.collection(RUN_USERS_LOGIN_COLLECTION)
+            .find({ username: body.username }, {})
+            .toArray((err, data) => {
+                if (data.length > 0) {
+                    handleError(res, err.message, "Username already exists.");
+                } else {
+                    db.collection(RUN_USERS_LOGIN_COLLECTION).insertOne(data, handleResponse(res));
+                }
+            });
     },
 
     runUserLogin(req, res) {
@@ -254,11 +262,10 @@ module.exports = {
     },
 
     runUserLogout(req, res) {
-        let responseBody = {};
-        responseBody.success = false;
-        db.collection(RUN_USERS_COLLECTION)
-            .find({}, {})
-            .toArray((err, data) => res.send(data));
+        db.collection(RUN_USERS_SESSION_COLLECTION).removeOne(
+            { _id: createObjectID(req.query.id) },
+            handleResponse(res)
+        );
     },
 
     readRunEvents(req, res) {
