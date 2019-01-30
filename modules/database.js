@@ -225,7 +225,7 @@ module.exports = {
         let data = req.body;
         data.serverDate = new Date();
         db.collection(RUN_USERS_LOGIN_COLLECTION)
-            .find({ username: body.username }, {})
+            .find({ username: data.username }, {})
             .toArray((err, data) => {
                 if (data.length > 0) {
                     handleError(res, err.message, "Username already exists.");
