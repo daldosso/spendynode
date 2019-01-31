@@ -249,7 +249,7 @@ module.exports = {
                     }
                     db.collection(RUN_USERS_SESSION_COLLECTION).insertOne(session, (err, doc) => {
                         if (err) {
-                            handleError(res, err.message, "Failed to create new user.");
+                            handleError(res, err.message);
                         } else {
                             let sessionID = doc.ops[0]._id;
                             res.status(201).json({
@@ -257,6 +257,8 @@ module.exports = {
                             });
                         }
                     });
+                } else {
+                    handleError(res, "Wrong credentials");
                 }
             });
     },
