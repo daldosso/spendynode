@@ -228,7 +228,7 @@ module.exports = {
             .find({ username: body.username }, {})
             .toArray((err, data) => {
                 if (data.length > 0) {
-                    handleError(res, err.message, "Username already exists.");
+                    handleError(res, "Username already exists.");
                 } else {
                     db.collection(RUN_USERS_LOGIN_COLLECTION).insertOne(body, handleResponse(res));
                 }
