@@ -211,7 +211,23 @@ module.exports = {
     upsertRunUser(req, res) {
         let data = req.body;
         data.serverDate = new Date();
-        db.collection(RUN_USERS_COLLECTION).insertOne(data, handleResponse(res));
+
+        if (!!data.id) {
+            db.collection.updateOne(
+                { _id: data.id },
+                { $set: { 
+                        firstname: data.firstname, 
+                        lastname: data.lastname, 
+                        birthdate: data.birthdate, 
+                        username: data.username, 
+                        password: data.password 
+                    } 
+                },
+                { upsert: true }
+            );
+        } else {
+            db.collection(RUN_USERS_COLLECTION).insertOne(data, handleResponse(res));
+        }
     },
 
     deleteRunUser(req, res) {
