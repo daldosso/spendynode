@@ -213,7 +213,7 @@ module.exports = {
         data.serverDate = new Date();
 
         if (!!data.id) {
-            db.collection.updateOne(
+            db.collection.update(
                 { _id: data.id },
                 { $set: { 
                         firstname: data.firstname, 
@@ -222,8 +222,7 @@ module.exports = {
                         username: data.username, 
                         password: data.password 
                     } 
-                },
-                { upsert: true }
+                }
             );
         } else {
             db.collection(RUN_USERS_COLLECTION).insertOne(data, handleResponse(res));
