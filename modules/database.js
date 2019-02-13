@@ -214,7 +214,7 @@ module.exports = {
         console.log('upsertRunUser', data);
         if (!!data.id) {
             db.collection(RUN_USERS_COLLECTION).update(
-                { _id: data.id },
+                { _id: createObjectID(data.id) },
                 { $set: { 
                         firstname: data.firstname, 
                         lastname: data.lastname, 
@@ -222,8 +222,7 @@ module.exports = {
                         username: data.username, 
                         password: data.password 
                     } 
-                }
-            );
+            }, handleResponse(res));
         } else {
             db.collection(RUN_USERS_COLLECTION).insertOne(data, handleResponse(res));
         }
