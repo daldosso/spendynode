@@ -211,7 +211,7 @@ module.exports = {
     upsertRunUser(req, res) {
         let data = req.body;
         data.serverDate = new Date();
-
+        console.log('upsertRunUser', data);
         if (!!data.id) {
             db.collection(RUN_USERS_COLLECTION).update(
                 { _id: data.id },
