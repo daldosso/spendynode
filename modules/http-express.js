@@ -71,6 +71,13 @@ app.route("/run-races")
    .post(db.upsertRunRaces)
    .delete(db.deleteRunRaces);
 
+app.route("/pos-configuration")
+    .get((req, res) => res.send({
+        "menu": [
+            { desc: "Test"}
+        ]
+}));
+
 module.exports = {
     listen() {
         const port = app.get('port');
