@@ -80,10 +80,10 @@ app.route("/pos-configuration")
             { "id": 4, "desc": "Inventario", "template": "Inventary" }
         ],
         "templates": [
-            { "id": 1, "desc": "template": "GetStuff", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
-            { "id": 2, "desc": "template": "PrintLabels", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
-            { "id": 3, "desc": "template": "ProductDetails", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
-            { "id": 4, "desc": "template": "Inventary", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] }
+            { "id": 1, "desc", "template": "GetStuff", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
+            { "id": 2, "desc", "template": "PrintLabels", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
+            { "id": 3, "desc", "template": "ProductDetails", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
+            { "id": 4, "desc", "template": "Inventary", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] }
         ]}
 ));
 
