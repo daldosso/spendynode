@@ -84,8 +84,8 @@ app.route("/pos-configuration")
             { "id": 2, "desc": "template": "PrintLabels", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
             { "id": 3, "desc": "template": "ProductDetails", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] },
             { "id": 4, "desc": "template": "Inventary", "fields": [{"id": 1, "desc": "Codice articolo"}, {"id": 2, "desc": "Quantità"}] }
-        ]
-}));
+        ]}
+));
 
 module.exports = {
     listen() {
