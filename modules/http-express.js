@@ -7,7 +7,7 @@ let config = require('config'),
     compression = require('compression');
 
 
-app.use("/public",  express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/../public"));
 
 console.log('__dirname', __dirname);
 
