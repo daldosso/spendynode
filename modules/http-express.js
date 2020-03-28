@@ -4,9 +4,9 @@ let config = require('config'),
     db = require("./database"),
     bodyParser = require("body-parser"),
     cors = require('cors'),
-    compression = require('compression');
-
-let client = path.join(__dirname, 'client');
+    compression = require('compression'),
+    path = require('path'),
+    client = path.join(__dirname, 'client');
 
 app.set('port', (process.env.PORT || 5000));
 
