@@ -6,7 +6,10 @@ let config = require('config'),
     cors = require('cors'),
     compression = require('compression');
 
-app.use("/public", express.static(__dirname + "/public"));
+
+app.use("/public",  express.static(__dirname + "/public"));
+
+console.log('__dirname', __dirname);
 
 app.set('port', (process.env.PORT || 5000));
 
