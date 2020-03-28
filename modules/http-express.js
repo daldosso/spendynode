@@ -6,10 +6,7 @@ let config = require('config'),
     cors = require('cors'),
     compression = require('compression');
 
-
-app.use(express.static(__dirname + "/../public"));
-
-console.log('__dirname', __dirname);
+let client = path.join(__dirname, 'client');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -21,6 +18,12 @@ app.get("/spendykt", function(req, res) {
         success: true
     });
 });
+
+app.get('/client', function(req, res) {
+    res.sendFile(path.join(client, 'index.html'));
+});
+
+console.log('client', client);
 
 app.post("/spendykt-login", function(req, res) {
     let body = req.body;
