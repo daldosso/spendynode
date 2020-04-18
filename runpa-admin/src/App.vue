@@ -1,5 +1,11 @@
+
 <template>
-  <v-app>
+  <main>
+    <transition mode="out-in">
+      <router-view />
+    </transition>
+  </main>
+  <!-- <v-app>
     <v-app-bar
       app
       color="primary"
@@ -40,21 +46,51 @@
     <v-content>
       <HelloWorld/>
     </v-content>
-  </v-app>
+  </v-app>-->
 </template>
 
+<style lang="scss">
+	@import "@/styles/index.scss";
+
+	/* Remove in 1.2 */
+	.v-datatable thead th.column.sortable i {
+		vertical-align: unset;
+	}
+</style>
+
 <script>
-import HelloWorld from './components/HelloWorld';
+// import HelloWorld from "./components/HelloWorld";
+
+// export default {
+//   name: "App",
+
+//   components: {
+//     HelloWorld
+//   },
+
+//   data: () => ({
+//     //
+//   })
+// };
 
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
+  created: function() {
+    this.$http.interceptors.response.use(
+      response => {
+        return response;
+      },
+      error => {
+        if (401 === error.response.status) {
+          if (this.$store.getters.authorized) {
+            this.$store.dispatch("refreshtoken");
+          } else {
+            return Promise.reject(error);
+          }
+        } else {
+          return Promise.reject(error);
+        }
+      }
+    );
+  }
 };
 </script>
