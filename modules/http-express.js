@@ -6,7 +6,7 @@ let config = require('config'),
     cors = require('cors'),
     compression = require('compression'),
     path = require('path'),
-    client = path.join(__dirname, 'client');
+    client = path.join(__dirname, 'client/dist');
 
 app.set('port', (process.env.PORT || 5000));
 
