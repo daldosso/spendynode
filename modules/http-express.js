@@ -23,6 +23,11 @@ app.get('/client', function(req, res) {
     res.sendFile(path.join(client, 'index.html'));
 });
 
+app.get('/js(/*)?', function(req, res) {
+    console.log('js', req.path);
+    // res.sendFile(path.join(client, 'index.html'));
+});
+
 console.log('client', client);
 
 app.post("/spendykt-login", function(req, res) {
