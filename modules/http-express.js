@@ -25,12 +25,12 @@ app.get('/client', function(req, res) {
 
 app.get('/js(/*)?', function(req, res) {
     let fileName = path.basename(req.path);
-    res.sendFile(path.join(client, fileName));
+    res.sendFile(path.join(client, 'js' + fileName));
 });
 
 app.get('/css(/*)?', function(req, res) {
     let fileName = path.basename(req.path);
-    res.sendFile(path.join(client, fileName));
+    res.sendFile(path.join(client, 'css' + fileName));
 });
 
 console.log('client', client);
