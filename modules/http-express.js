@@ -33,6 +33,16 @@ app.get('/css(/*)?', function(req, res) {
     res.sendFile(path.join(client, 'css/' + fileName));
 });
 
+app.get('/img(/*)?', function(req, res) {
+    let fileName = path.basename(req.path);
+    res.sendFile(path.join(client, 'img/' + fileName));
+});
+
+app.get('/fonts(/*)?', function(req, res) {
+    let fileName = path.basename(req.path);
+    res.sendFile(path.join(client, 'fonts/' + fileName));
+});
+
 console.log('client', client);
 
 app.post("/spendykt-login", function(req, res) {
