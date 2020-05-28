@@ -25,8 +25,12 @@ app.get('/client', function(req, res) {
 
 app.get('/js(/*)?', function(req, res) {
     let fileName = path.basename(req.path);
-    console.log('js fileName', fileName);
-    // res.sendFile(path.join(client, 'index.html'));
+    res.sendFile(path.join(client, fileName));
+});
+
+app.get('/css(/*)?', function(req, res) {
+    let fileName = path.basename(req.path);
+    res.sendFile(path.join(client, fileName));
 });
 
 console.log('client', client);
