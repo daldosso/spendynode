@@ -24,7 +24,8 @@ app.get('/client', function(req, res) {
 });
 
 app.get('/js(/*)?', function(req, res) {
-    console.log('js', req.path);
+    let fileName = path.basename(req.path);
+    console.log('js fileName', fileName);
     // res.sendFile(path.join(client, 'index.html'));
 });
 
