@@ -14,7 +14,7 @@
     "cors": "*",
     "debug": "~2.2.0",
     "express": "~4.14.0",
-    "mongodb": "^2.1.6",
+    "mongodb": "^3.6.1",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "config": "^1.25.1",
