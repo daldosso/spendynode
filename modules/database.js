@@ -180,11 +180,21 @@ module.exports = {
 
     readChallengeRun(req, res) {
         let body = req.body,
-            responseBody = {};
-        responseBody.success = false;
-        db.collection(CHALLENGE_RUN_COLLECTION)
+            responseBody = {
+                data: [
+                    {
+                        date: "31/01/2021",
+                        title: "Brutal Trail"
+                    }, {
+                        date: "15/03/2021",
+                        title: "Trail del Barro"
+                    }
+                ]
+            };
+        responseBody.success = true;
+        /*db.collection(CHALLENGE_RUN_COLLECTION)
             .find({}, {})
-            .toArray((err, data) => res.send(data));
+            .toArray((err, data) => res.send(data));*/
     },
 
     upsertChallengeRun(req, res) {
