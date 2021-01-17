@@ -192,6 +192,9 @@ module.exports = {
                 ]
             };
         responseBody.success = true;
+
+        res.send(responseBody);
+
         /*db.collection(CHALLENGE_RUN_COLLECTION)
             .find({}, {})
             .toArray((err, data) => res.send(data));*/
