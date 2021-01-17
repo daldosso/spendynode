@@ -73,7 +73,7 @@ let deleteData = (id, res, collection) => {
 };
 
 module.exports = {
-    connect() {
+    /*connect() {
         mongodb.MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
             if (err) {
                 console.log(err);
@@ -82,7 +82,7 @@ module.exports = {
             db = database;
             console.log("Database connection ready");
         });
-    },
+    },*/
 
     createNewUser(req, res) {
         let newUser = req.body,
